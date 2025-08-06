@@ -28,10 +28,12 @@ boxs.forEach((box) => {
     console.log("box was clicked");
     if (turnO) {
       box.innerText = "O";
+      box.classList.remove("x-style"); // ensure X styling removed
       box.classList.add("o-style");
       turnO = false;
     } else {
       box.innerText = "X";
+      box.classList.remove("o-style"); // ensure O styling removed
       box.classList.add("x-style");
       turnO = true;
     }
