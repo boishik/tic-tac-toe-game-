@@ -53,6 +53,7 @@ const enableBoxes = () => {
   for (let box of boxs) {
     box.disabled = false;
     box.innerText = "";
+    box.classList.remove("win-cell"); // remove highlight
   }
 };
 
@@ -71,6 +72,12 @@ const checkWinner = () => {
     if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
       if (pos1Val == pos2Val && pos2Val == pos3Val) {
         console.log("Winner", pos1Val);
+
+        // Update : Highlightint the winning cells
+        patterns.forEach((index) => {
+          boxs[index].classList.add("win-cell");
+        });
+
         showWinner(pos1Val);
       }
     }
