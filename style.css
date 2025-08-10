@@ -56,9 +56,9 @@ body {
 .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* always 3 columns */
-  gap: 1.2vmin; /* space between cells */
-  width: min(92vmin, 520px); /* fit on phones, cap on big screens */
-  margin: 0 auto; /* center the board */
+  gap: clamp(6px, 2vmin, 14px);
+  width: min(94vw, 94vmin); /* fit any phone width */
+  margin: 0 auto;
 }
 
 .box {
@@ -67,11 +67,24 @@ body {
   border-radius: 1rem;
   border: none;
   box-shadow: 0 0 1rem black;
-  font-size: clamp(1.6rem, 8vmin, 3rem);
+  font-size: clamp(1.4rem, 8vmin, 3rem); /* scales on all screens */
   color: #b0413e;
   background-color: #ffffc7;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
+
+/*
+.box {
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 0 1rem black;
+  font-size: clamp(1.6rem, 8vmin, 3rem);
+  color: #b0413e;
+  background-color: #ffffc7;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}*/
 .box:hover {
   background-color: #fff9a0;
   transform: scale(1.04);
@@ -204,7 +217,7 @@ body {
     transform: scale(1.05);
   }
 }
-
+/*
 @media (max-width: 500px) {
   .box {
     height: 25vmin;
@@ -214,7 +227,7 @@ body {
   h1 {
     font-size: 1.8rem;
   }
-}
+}*/
 
 /* --- Scoreboard --- */
 .scoreboard {
