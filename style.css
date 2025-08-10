@@ -308,16 +308,14 @@ body {
   padding: 0 1rem;
 }
 
-.scorecard {
-  height: 92px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+.scoreboard {
+  width: 100%;
+  max-width: min(94vmin, 650px); /* matches game width better on big screens */
+  margin: 1.25rem auto 0;
   display: grid;
-  place-items: center;
-  padding: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  padding: 0 1rem;
 }
 
 .scorecard .label {
