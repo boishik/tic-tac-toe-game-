@@ -3,6 +3,12 @@
   padding: 0;
   font-family: "Inter", sans-serif;
 }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2.5vmin, 20px); /* header → scoreboard → board */
+}
 
 h1 {
   font-size: 2.2rem;
@@ -36,11 +42,11 @@ body {
 }
 
 .container {
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
+  padding-block: clamp(8px, 3vmin, 20px);
 }
+
 /*
 .game {
   height: 60vmin;
@@ -52,26 +58,27 @@ body {
   gap: 1.5vmin;
 }
 */
-
 .game {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* always 3 columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(6px, 2vmin, 14px);
-  width: min(94vw, 94vmin); /* fit any phone width */
-  margin: 0 auto;
+  width: min(94vw, 94vmin);
+  margin: clamp(10px, 3vmin, 24px) auto 0; /* ← adds space under the scoreboard */
 }
 
 .box {
   width: 100%;
-  aspect-ratio: 1 / 1; /* perfect squares */
+  aspect-ratio: 1 / 1;
   border-radius: 1rem;
   border: none;
   box-shadow: 0 0 1rem black;
-  font-size: clamp(1.4rem, 8vmin, 3rem); /* scales on all screens */
-  color: #b0413e;
+  font-size: clamp(1.4rem, 8vmin, 3rem);
   background-color: #ffffc7;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
+.box:hover {
+  transform: scale(1.04);
+} /* was too big before */
 
 /*
 .box {
