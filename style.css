@@ -41,6 +41,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+/*
 .game {
   height: 60vmin;
   width: 60vmin;
@@ -50,7 +51,43 @@ body {
   align-items: center;
   gap: 1.5vmin;
 }
+*/
 
+.game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* always 3 columns */
+  gap: 1.2vmin; /* space between cells */
+  width: min(92vmin, 520px); /* fit on phones, cap on big screens */
+  margin: 0 auto; /* center the board */
+}
+
+.box {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* perfect squares */
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 0 1rem black;
+  font-size: clamp(1.6rem, 8vmin, 3rem);
+  color: #b0413e;
+  background-color: #ffffc7;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+.box:hover {
+  background-color: #fff9a0;
+  transform: scale(1.04);
+}
+.box:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 420px) {
+  .game {
+    gap: 1vmin;
+    width: 94vmin;
+  }
+}
+
+/*
 .box {
   height: 18vmin;
   width: 18vmin;
@@ -72,7 +109,7 @@ body {
 
 .box:active {
   transform: scale(0.95);
-}
+}*/
 
 #reset-btn {
   padding: 1rem;
