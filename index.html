@@ -20,7 +20,24 @@
       <button id="new-btn">New Game</button>
     </div>
     <main>
-      <h1>Tic-Tac-Toe</h1>
+      <h1>Lets Play Tic-Tac-Toe Game !</h1>
+
+      <!-- NEW: Scoreboard -->
+      <section class="scoreboard">
+        <div class="scorecard o-card">
+          <span class="label">Player O</span>
+          <span id="o-score" class="value">0</span>
+        </div>
+        <div class="scorecard x-card">
+          <span class="label">Player X</span>
+          <span id="x-score" class="value">0</span>
+        </div>
+        <div class="scorecard d-card">
+          <span class="label">Draws</span>
+          <span id="d-score" class="value">0</span>
+        </div>
+      </section>
+
       <div class="container">
         <div class="game">
           <button class="box"></button>
@@ -34,6 +51,7 @@
           <button class="box"></button>
         </div>
       </div>
+
       <button id="reset-btn">Reset</button>
     </main>
   </body>

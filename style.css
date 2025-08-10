@@ -4,9 +4,35 @@
   font-family: "Inter", sans-serif;
 }
 
+h1 {
+  font-size: 2.2rem;
+  font-family: "Poppins", sans-serif;
+
+  font-weight: 700;
+  padding-top: 0.75rem;
+  color: #134673; /* soft blue-gray */
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
 body {
   background-color: #548687;
   text-align: center;
+  background: linear-gradient(-45deg, #548687, #76b5a0, #a7d5c0, #497d74);
+  background-size: 400% 400%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .container {
@@ -67,8 +93,12 @@ body {
 }
 
 #msg {
-  color: #ffffc7;
-  font-size: 8vmin;
+  color: #0b1a1b;
+  background: rgba(189, 227, 224, 0.467);
+  font-size: clamp(1.4rem, 5vw, 2.2rem); /* slightly smaller on phones */
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .msg-container {
@@ -147,4 +177,140 @@ body {
   h1 {
     font-size: 1.8rem;
   }
+}
+
+/* --- Scoreboard --- */
+.scoreboard {
+  max-width: 720px;
+  margin: 1.25rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  padding: 0 1rem;
+}
+
+.scorecard {
+  height: 92px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+}
+
+.scorecard .label {
+  display: block;
+  font-size: 0.95rem;
+  color: #0b1a1b;
+  opacity: 0.85;
+  margin-bottom: 0.15rem;
+}
+.scorecard .value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.o-card .value {
+  color: #0ea5e9;
+} /* O: sky */
+.x-card .value {
+  color: #f43f5e;
+} /* X: rose */
+.d-card .value {
+  color: #f59e0b;
+} /* Draw: amber */
+
+/* small bounce when a score changes */
+.bump {
+  animation: bump 280ms ease;
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Scoreboard */
+.scoreboard {
+  max-width: 720px;
+  margin: 1.25rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  padding: 0 1rem;
+}
+
+.scorecard {
+  height: 92px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+}
+
+.scorecard .label {
+  display: block;
+  font-size: 0.95rem;
+  color: #0b1a1b;
+  opacity: 0.85;
+  margin-bottom: 0.15rem;
+}
+.scorecard .value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.o-card .value {
+  color: #1b73ae; /* deep teal */
+}
+
+.x-card .value {
+  color: #7f1d1d; /* deep maroon */
+}
+
+.d-card .value {
+  color: #c66018; /* warm brown */
+}
+/* small bounce when a score changes */
+.bump {
+  animation: bump 280ms ease;
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Winner/Draw message badges */
+
+.status-o {
+  background: linear-gradient(90deg, #cffafe, #bae6fd);
+  color: #0c4a6e;
+}
+.status-x {
+  background: linear-gradient(90deg, #ffe4e6, #fecdd3);
+  color: #7f1d1d;
+}
+.status-draw {
+  background: linear-gradient(90deg, #fef9c3, #fde68a);
+  color: #7c2d12;
 }
