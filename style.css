@@ -61,24 +61,26 @@ body {
 .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(6px, 2vmin, 14px);
-  width: min(94vw, 94vmin);
-  margin: clamp(10px, 3vmin, 24px) auto 0; /* ← adds space under the scoreboard */
+  gap: 1rem;
+  width: min(94vmin, 500px); /* max width = 500px */
+  margin: 1.5rem auto 0;
 }
 
 .box {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* keep perfect square */
   border-radius: 1rem;
   border: none;
   box-shadow: 0 0 1rem black;
-  font-size: clamp(1.4rem, 8vmin, 3rem);
+  font-size: clamp(1.5rem, 6vmin, 2.5rem); /* scales but capped */
   background-color: #ffffc7;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
+
 .box:hover {
+  background-color: #fff9a0;
   transform: scale(1.04);
-} /* was too big before */
+}
 
 /*
 .box {
