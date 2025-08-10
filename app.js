@@ -1,42 +1,21 @@
-let boxs = document.querySelectorAll(".box");
-let resetBtn = document.querySelector("#reset-btn");
-let newGameBtn = document.querySelector("#new-btn");
-let msgContainer = document.querySelector(".msg-container");
-let msg = document.querySelector("#msg");
+// Elements
+const boxes = document.querySelectorAll(".box");
+const resetBtn = document.querySelector("#reset-btn");
+const newGameBtn = document.querySelector("#new-btn");
+const msgContainer = document.querySelector(".msg-container");
+const msg = document.querySelector("#msg");
 
-let oScore = document.querySelector("#o-score");
-let xScore = document.querySelector("#x-score");
-let drawScore = document.querySelector("#d-score");
+const oScore = document.querySelector("#o-score");
+const xScore = document.querySelector("#x-score");
+const drawScore = document.querySelector("#d-score");
 
-let turnO = true; // player turn
+// State
+let turnO = true;
 let oWins = 0,
   xWins = 0,
   draws = 0;
 
-const resetBoardOnly = () => {
-  turnO = true;
-  enableBoxes();
-  msgContainer.classList.add("hide");
-  clearMsgState();
-};
-
-const resetGame = () => {
-  // clears board only - keeps scores
-  resetBoardOnly();
-};
-
-function clearMsgState() {
-  msg.classList.remove("status-o", "status-x", "status-draw");
-}
-
-// small bounce to a score element
-function bump(el) {
-  el.classList.remove("bump");
-  void el.offsetWidth; // reflow to restart animation
-  el.classList.add("bump");
-}
-
-let winPatterns = [
+const winPatterns = [
   [0, 1, 2],
   [0, 3, 6],
   [0, 4, 8],
@@ -47,41 +26,49 @@ let winPatterns = [
   [6, 7, 8],
 ];
 
-boxs.forEach((box) => {
+// Helpers
+const clearMsgState = () =>
+  msg.classList.remove("status-o", "status-x", "status-draw");
+
+const bump = (el) => {
+  el.classList.remove("bump");
+  void el.offsetWidth; // restart animation
+  el.classList.add("bump");
+};
+
+const disableBoxes = () => {
+  boxes.forEach((b) => (b.disabled = true));
+};
+
+const enableBoxes = () => {
+  boxes.forEach((b) => {
+    b.disabled = false;
+    b.innerText = "";
+    b.classList.remove("win-cell", "o-style", "x-style");
+  });
+};
+
+// UI events
+boxes.forEach((box) => {
   box.addEventListener("click", () => {
     if (turnO) {
       box.innerText = "O";
       box.classList.remove("x-style");
       box.classList.add("o-style");
-      turnO = false;
     } else {
       box.innerText = "X";
       box.classList.remove("o-style");
       box.classList.add("x-style");
-      turnO = true;
     }
+    turnO = !turnO;
     box.disabled = true;
     checkWinnerOrDraw();
   });
 });
 
-const disableBoxes = () => {
-  for (let box of boxs) box.disabled = true;
-};
+function showWinner(winnerChar, pattern) {
+  pattern.forEach((i) => boxes[i].classList.add("win-cell"));
 
-const enableBoxes = () => {
-  for (let box of boxs) {
-    box.disabled = false;
-    box.innerText = "";
-    box.classList.remove("win-cell", "o-style", "x-style");
-  }
-};
-
-function showWinner(winnerChar, winningPattern) {
-  // highlight winning cells
-  winningPattern.forEach((idx) => boxs[idx].classList.add("win-cell"));
-
-  // update scoreboard
   if (winnerChar === "O") {
     oWins++;
     oScore.innerText = oWins;
@@ -112,25 +99,26 @@ function showDraw() {
   disableBoxes();
 }
 
-function boardIsFull() {
-  return Array.from(boxs).every((b) => b.innerText !== "");
-}
+const boardIsFull = () => Array.from(boxes).every((b) => b.innerText !== "");
 
 function checkWinnerOrDraw() {
-  for (const pattern of winPatterns) {
-    const [a, b, c] = pattern;
-    const value1 = boxs[a].innerText;
-    const value2 = boxs[b].innerText;
-    const value3 = boxs[c].innerText;
-
-    if (value1 && value1 === value2 && value2 === value3) {
-      return showWinner(value1, pattern);
-    }
+  for (const [a, b, c] of winPatterns) {
+    const v1 = boxes[a].innerText,
+      v2 = boxes[b].innerText,
+      v3 = boxes[c].innerText;
+    if (v1 && v1 === v2 && v2 === v3) return showWinner(v1, [a, b, c]);
   }
-  if (boardIsFull()) {
-    showDraw();
-  }
+  if (boardIsFull()) showDraw();
 }
+
+// Reset handlers (board only)
+const resetBoardOnly = () => {
+  turnO = true;
+  enableBoxes();
+  msgContainer.classList.add("hide");
+  clearMsgState();
+};
+const resetGame = () => resetBoardOnly();
 
 newGameBtn.addEventListener("click", resetBoardOnly);
 resetBtn.addEventListener("click", resetGame);
